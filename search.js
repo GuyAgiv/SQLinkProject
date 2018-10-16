@@ -39,13 +39,12 @@ function ExtractRelevantFilesByExtension(directory, word, extension)
 
             if(stat.isDirectory())
             {
-                SearchRecursivelyDeeplyInDirectory(objectFullPath);
+                SearchRecursivelyDeeplyInDirectory(objectFullPath,extension);
             }
             else
             {
-                if(path.extname(objectFullPath).split('.').pop() === extension)
+                if(path.extname(objectFullPath) === "." + extension)
                 {
-
                     filesList.push(objectFullPath);
                 }
 
@@ -62,7 +61,6 @@ function ExtractRelevantFilesByExtension(directory, word, extension)
         // Iterating the filesList which includes only the desired extension we looked for through lambda expression
         filesList.forEach(file => {
             const fileContent = fs.readFileSync(file);
-
             if(fileContent.includes(word)) {
                 desiredFilesList.push(file);
             }
